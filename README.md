@@ -1,5 +1,12 @@
 # terraform-aws-timestream-influxdb
 
+## TODO
+
+- upgrade aws provider version when influxdb cluster resource becomes available
+- update documentation with provider details
+- release module to terraform registry
+- implement influxdb cluster example
+
 ## Examples
 
 * [InfluxDB cluster](https://github.com/dare-global/terraform-aws-timestream-influxdb/tree/main/examples/influxdb-cluster/)
