@@ -2,7 +2,7 @@
 
 ## TODO
 
-- upgrade aws provider version when influxdb cluster resource becomes available
+- upgrade aws provider version when influxdb cluster resource becomes available and uncomment relevant resources
 - update documentation with provider details
 - release module to terraform registry
 - implement influxdb cluster example
