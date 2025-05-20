@@ -1,12 +1,13 @@
 resource "aws_timestreaminfluxdb_db_cluster" "this" {
   count = var.deployment_type == "MULTI_NODE_READ_REPLICAS" ? 1 : 0
 
-  identifier = var.name
+  name = var.name
 
   deployment_type = var.deployment_type
 
-  db_cluster_type = var.db_cluster_type
-  db_storage_type = var.db_storage_type
+  db_instance_type  = var.db_instance_type
+  db_storage_type   = var.db_storage_type
+  allocated_storage = var.allocated_storage
 
   organization = var.organization
   bucket       = var.bucket
@@ -16,7 +17,9 @@ resource "aws_timestreaminfluxdb_db_cluster" "this" {
   publicly_accessible    = var.publicly_accessible
   vpc_subnet_ids         = var.vpc_subnet_ids
   vpc_security_group_ids = var.vpc_security_group_ids
-  network_type           = var.network_type
+
+  network_type = var.network_type
+  port         = var.port
 
   failover_mode = var.failover_mode
 

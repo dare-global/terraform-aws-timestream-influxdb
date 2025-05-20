@@ -3,11 +3,6 @@ variable "name" {
   type        = string
 }
 
-variable "db_cluster_type" {
-  description = "The type of compute and memory capacity for the cluster"
-  type        = string
-}
-
 variable "db_instance_type" {
   description = "The type of compute and memory capacity for the instance"
   type        = string
@@ -90,6 +85,12 @@ variable "failover_mode" {
 
 variable "network_type" {
   description = "Specifies whether the network type of the Timestream for InfluxDB cluster is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols."
+  type        = string
+  default     = null
+}
+
+variable "port" {
+  description = "The port on which the cluster accepts connections. Valid values: `1024`-`65535`. Cannot be `2375`-`2376`, `7788`-`7799`, `8090`, or `51678`-`51680`. This argument is updatable."
   type        = string
   default     = null
 }
