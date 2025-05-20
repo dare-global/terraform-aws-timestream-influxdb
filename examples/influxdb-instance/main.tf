@@ -36,9 +36,11 @@ resource "aws_security_group" "influxdb_instance" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "influxdb_instance" {
-  security_group_id            = aws_security_group.influxdb_instance.id
-  referenced_security_group_id = aws_security_group.influxdb_instance.id
-  ip_protocol                  = -1
+  security_group_id = aws_security_group.influxdb_instance.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "tcp"
+  from_port         = 8086
+  to_port           = 8086
 }
 
 #####
@@ -51,14 +53,17 @@ module "influxdb_instance" {
   deployment_type = "SINGLE_AZ"
 
   db_instance_type = "db.influx.medium"
-  db_storage_type  = "InfluxIOPS"
+  db_storage_type  = "InfluxIOIncludedT1"
 
   organization = "myorg"
+  bucket       = "initial"
   username     = "admin"
   password     = "supersecurepassword"
 
   vpc_subnet_ids         = data.aws_subnets.all.ids
   vpc_security_group_ids = [aws_security_group.influxdb_instance.id]
+
+  publicly_accessible = true
 
   log_delivery_configuration = {
     s3_configuration = {
@@ -78,6 +83,8 @@ module "influxdb_instance" {
 #####
 resource "aws_s3_bucket" "influxdb_instance" {
   bucket = "influxdb-instance-s3-bucket-test"
+
+  force_destroy = true
 }
 
 data "aws_iam_policy_document" "influxdb_instance" {

@@ -6,6 +6,7 @@
 - update documentation with provider details
 - release module to terraform registry
 - implement influxdb cluster example
+- parameter group support- currently not supported by provider
 
 ## Examples
 
@@ -34,19 +35,17 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_timestreaminfluxdb_db_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/timestreaminfluxdb_db_cluster) | resource |
 | [aws_timestreaminfluxdb_db_instance.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/timestreaminfluxdb_db_instance) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_allocated_storage"></a> [allocated\_storage](#input\_allocated\_storage) | Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. | `number` | `null` | no |
+| <a name="input_allocated_storage"></a> [allocated\_storage](#input\_allocated\_storage) | Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. | `number` | `20` | no |
 | <a name="input_bucket"></a> [bucket](#input\_bucket) | Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket. A bucket combines the concept of a database and a retention period (the duration of time that each data point persists). A bucket belongs to an organization. | `string` | `null` | no |
 | <a name="input_db_instance_type"></a> [db\_instance\_type](#input\_db\_instance\_type) | The type of compute and memory capacity for the instance | `string` | `"db.influx.medium"` | no |
-| <a name="input_db_storage_type"></a> [db\_storage\_type](#input\_db\_storage\_type) | The storage type to be used (e.g., 'InfluxIOPS', 'InfluxStandard') | `string` | `null` | no |
+| <a name="input_db_storage_type"></a> [db\_storage\_type](#input\_db\_storage\_type) | The storage type to be used (e.g., 'InfluxIOIncludedT1', 'InfluxIOIncludedT2', 'InfluxIOIncludedT3') | `string` | `null` | no |
 | <a name="input_deployment_type"></a> [deployment\_type](#input\_deployment\_type) | Deployment type, `SINGLE_AZ`, `WITH_MULTIAZ_STANDBY`, `MULTI_NODE_READ_REPLICAS`. | `string` | n/a | yes |
-| <a name="input_failover_mode"></a> [failover\_mode](#input\_failover\_mode) | Specifies the behavior of failure recovery when the primary node of the cluster fails. Valid options are: 'AUTOMATIC' and 'NO\_FAILOVER'. | `string` | `null` | no |
 | <a name="input_log_delivery_configuration"></a> [log\_delivery\_configuration](#input\_log\_delivery\_configuration) | Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable. | <pre>object({<br/>    s3_configuration = object({<br/>      bucket_name = string<br/>      enabled     = bool<br/>    })<br/>  })</pre> | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | Unique identifier name for the Timestream for InfluxDB instance or cluster | `string` | n/a | yes |
 | <a name="input_network_type"></a> [network\_type](#input\_network\_type) | Specifies whether the network type of the Timestream for InfluxDB cluster is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols. | `string` | `null` | no |
@@ -63,11 +62,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cluster_arn"></a> [cluster\_arn](#output\_cluster\_arn) | ARN of the InfluxDB cluster |
-| <a name="output_cluster_endpoint"></a> [cluster\_endpoint](#output\_cluster\_endpoint) | Endpoint for the InfluxDB cluster |
-| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | ID of the Timestream for InfluxDB cluster |
-| <a name="output_cluster_influx_auth_parameters_secret_arn"></a> [cluster\_influx\_auth\_parameters\_secret\_arn](#output\_cluster\_influx\_auth\_parameters\_secret\_arn) | ARN of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password. |
-| <a name="output_cluster_reader_endpoint"></a> [cluster\_reader\_endpoint](#output\_cluster\_reader\_endpoint) | The endpoint used to connect to the Timestream for InfluxDB cluster for read-only operations. |
 | <a name="output_instance_arn"></a> [instance\_arn](#output\_instance\_arn) | ARN of the InfluxDB instance |
 | <a name="output_instance_endpoint"></a> [instance\_endpoint](#output\_instance\_endpoint) | Endpoint for the InfluxDB instance |
 | <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | ID of the Timestream for InfluxDB instance |
