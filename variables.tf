@@ -10,7 +10,7 @@ variable "db_instance_type" {
 }
 
 variable "db_storage_type" {
-  description = "The storage type to be used (e.g., 'InfluxIOPS', 'InfluxStandard')"
+  description = "The storage type to be used (e.g., 'InfluxIOIncludedT1', 'InfluxIOIncludedT2', 'InfluxIOIncludedT3')"
   type        = string
   default     = null
 }
@@ -18,7 +18,7 @@ variable "db_storage_type" {
 variable "allocated_storage" {
   description = "Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384."
   type        = number
-  default     = null
+  default     = 20
 }
 
 variable "organization" {
@@ -77,11 +77,11 @@ variable "log_delivery_configuration" {
   default = null
 }
 
-variable "failover_mode" {
-  description = "Specifies the behavior of failure recovery when the primary node of the cluster fails. Valid options are: 'AUTOMATIC' and 'NO_FAILOVER'."
-  type        = string
-  default     = null
-}
+# variable "failover_mode" {
+#   description = "Specifies the behavior of failure recovery when the primary node of the cluster fails. Valid options are: 'AUTOMATIC' and 'NO_FAILOVER'."
+#   type        = string
+#   default     = null
+# }
 
 variable "network_type" {
   description = "Specifies whether the network type of the Timestream for InfluxDB cluster is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols."
