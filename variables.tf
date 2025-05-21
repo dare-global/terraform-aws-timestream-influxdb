@@ -55,6 +55,24 @@ variable "vpc_security_group_ids" {
   default     = []
 }
 
+variable "ingress_cidr_blocks" {
+  description = "List of security group ipv4 cidr blocks"
+  type        = list(string)
+  default     = []
+}
+
+variable "ingress_ipv6_cidr_blocks" {
+  description = "List of security group ipv6 cidr blocks"
+  type        = list(string)
+  default     = []
+}
+
+variable "ingress_prefix_list_ids" {
+  description = "List of security group prefix list ids"
+  type        = list(string)
+  default     = []
+}
+
 variable "deployment_type" {
   description = "Deployment type, `SINGLE_AZ`, `WITH_MULTIAZ_STANDBY`, `MULTI_NODE_READ_REPLICAS`."
   type        = string
@@ -90,9 +108,9 @@ variable "network_type" {
 }
 
 variable "port" {
-  description = "The port on which the cluster accepts connections. Valid values: `1024`-`65535`. Cannot be `2375`-`2376`, `7788`-`7799`, `8090`, or `51678`-`51680`. This argument is updatable."
-  type        = string
-  default     = null
+  description = "The port on which the cluster/instance accepts connections. Valid values: `1024`-`65535`. Cannot be `2375`-`2376`, `7788`-`7799`, `8090`, or `51678`-`51680`. This argument is updatable."
+  type        = number
+  default     = 8086
 }
 
 variable "tags" {
