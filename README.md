@@ -35,7 +35,12 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group_rule.this_ingress_cidr_blocks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.this_ingress_ipv6_cidr_blocks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.this_ingress_prefix_list_ids](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_timestreaminfluxdb_db_instance.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/timestreaminfluxdb_db_instance) | resource |
+| [aws_subnet.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
 
 ## Inputs
 
@@ -46,12 +51,15 @@ No modules.
 | <a name="input_db_instance_type"></a> [db\_instance\_type](#input\_db\_instance\_type) | The type of compute and memory capacity for the instance | `string` | `"db.influx.medium"` | no |
 | <a name="input_db_storage_type"></a> [db\_storage\_type](#input\_db\_storage\_type) | The storage type to be used (e.g., 'InfluxIOIncludedT1', 'InfluxIOIncludedT2', 'InfluxIOIncludedT3') | `string` | `null` | no |
 | <a name="input_deployment_type"></a> [deployment\_type](#input\_deployment\_type) | Deployment type, `SINGLE_AZ`, `WITH_MULTIAZ_STANDBY`, `MULTI_NODE_READ_REPLICAS`. | `string` | n/a | yes |
+| <a name="input_ingress_cidr_blocks"></a> [ingress\_cidr\_blocks](#input\_ingress\_cidr\_blocks) | List of security group ipv4 cidr blocks | `list(string)` | `[]` | no |
+| <a name="input_ingress_ipv6_cidr_blocks"></a> [ingress\_ipv6\_cidr\_blocks](#input\_ingress\_ipv6\_cidr\_blocks) | List of security group ipv6 cidr blocks | `list(string)` | `[]` | no |
+| <a name="input_ingress_prefix_list_ids"></a> [ingress\_prefix\_list\_ids](#input\_ingress\_prefix\_list\_ids) | List of security group prefix list ids | `list(string)` | `[]` | no |
 | <a name="input_log_delivery_configuration"></a> [log\_delivery\_configuration](#input\_log\_delivery\_configuration) | Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable. | <pre>object({<br/>    s3_configuration = object({<br/>      bucket_name = string<br/>      enabled     = bool<br/>    })<br/>  })</pre> | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | Unique identifier name for the Timestream for InfluxDB instance or cluster | `string` | n/a | yes |
 | <a name="input_network_type"></a> [network\_type](#input\_network\_type) | Specifies whether the network type of the Timestream for InfluxDB cluster is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols. | `string` | `null` | no |
 | <a name="input_organization"></a> [organization](#input\_organization) | The organization name for InfluxDB | `string` | n/a | yes |
 | <a name="input_password"></a> [password](#input\_password) | Password for accessing the InfluxDB instance | `string` | n/a | yes |
-| <a name="input_port"></a> [port](#input\_port) | The port on which the cluster accepts connections. Valid values: `1024`-`65535`. Cannot be `2375`-`2376`, `7788`-`7799`, `8090`, or `51678`-`51680`. This argument is updatable. | `string` | `null` | no |
+| <a name="input_port"></a> [port](#input\_port) | The port on which the cluster/instance accepts connections. Valid values: `1024`-`65535`. Cannot be `2375`-`2376`, `7788`-`7799`, `8090`, or `51678`-`51680`. This argument is updatable. | `number` | `8086` | no |
 | <a name="input_publicly_accessible"></a> [publicly\_accessible](#input\_publicly\_accessible) | Configures the DB instance/cluster with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access. | `bool` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to the resources | `map(string)` | `{}` | no |
 | <a name="input_username"></a> [username](#input\_username) | Username for accessing the InfluxDB instance | `string` | n/a | yes |
